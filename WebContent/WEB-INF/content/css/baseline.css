@@ -1,0 +1,254 @@
+/* ================ COLORS ======================
+
+
+   ORANGE (for h2 page title, #main h3 headings, h6, and footer link hover): #ff9100;
+
+   TEXT: (Note: other shades of grey are used for borders, footer links, breadcrumbs, etc., but these are the primary greys)
+
+   - DARK GRAY (for h4 & strong text, and td text): #666;
+   - MEDIUM GRAY (for body text): #727272;
+   - LIGHT GRAY (for h5): #97969a;
+
+   BACKGROUNDS:
+
+ 	- FAINT GRAY (for body background -visible only on monitors with resolution above 1024 x768): background: #d9dbdb;
+ 	- PALE GRAY (for border at top of page & footer): background: #ededed;
+ 	- PALER GRAY (for table heads) background-color:#f1f1f1; color:#787878;
+ 	- VERY PALE GRAY (for backgrounds of H3 headings in tertiary right nav as well as dropdown menus) background: #f6f6f7;
+ 	- EVEN PALER GRAY (for alt stripes on table rows): background: #f8f8f8;
+
+   TURQUIOSE (for links): #0078ae;
+   LIGHT TURQUIOSE (for hover / active links: #75b2d5;
+
+ ================ END COLORS ======================  */
+
+
+* { margin: 0; padding: 0; line-height: 1; }
+body {font: normal 12px Arial, Helvetica, sans-serif; background: #555; border-top: none; }
+body.dev {background: url(../img/bg_tr_dev.png); }
+body.sat {background: url(../img/bg_tr_sat.png); }
+body.uat {background: url(../img/bg_tr_uat.png); }
+body.ppe {background: url(../img/bg_tr_qa.png); }
+
+h1, h2, h3, h4, h5, h6, table { clear: both; }
+
+p {margin: 0 0 1em 0; }
+
+a, a:visited { color: #0078ae; border-bottom: 1px dotted #dae7f2; text-decoration: none; }
+	a:hover, a:focus { color: #75b2d5; }
+
+ul {margin: .5em 0;}
+ul li {list-style: none; background: transparent url(../img/list-marker.gif) no-repeat left 0.6em; padding-left: 8px; margin-bottom: 0.8em; margin-left: 0 !important }
+	#secondary ul li, #tertiary ul li {margin-bottom: .5em}
+ul ul {margin: .6em 0 0 1em;}
+	#tertiary ul ul {margin-left: .5em;}
+ol li {margin: .6em 0 0 1.5em;}
+
+strong {font-weight: bold; color: #666}
+em {font-style: italic;}
+
+img { border: none;}
+      a img, img a {border-bottom: none !important;}
+	.float_right {float: right; margin-left: 1em;}
+	.float_left {float: left; margin-right: 1em;}
+
+hr {border: 0; height: 1px; color: #e1e2e3; background-color: #e1e2e3;  margin-top: 0; margin-bottom: 6px;}
+
+/*-------------------------------------------
+   HEADINGS - Note these are by no means the only options.  On Thomsonreuters.com the h2 & H3 headings are SIFR replaced with the Locator
+   font (soon to be Knowledge).  TheLink sticks with the orange, black, gray color scheme, but modifies the font sizes introduces
+   a background image dot for the equivalent of H3.  The models below are intended to be a starting point - not an absolute - except
+   for H1, which should always be used for linking the logo to the homepage of the site.
+-------------------------------------------*/
+
+
+h2 {font-size: 20px; text-transform: uppercase; color: #ff9100; }
+h3 {font-size: 15px; color: #ff9100; text-transform: uppercase; }
+	#main h3, .half h3, .last_half h3 {margin-bottom: .5em; margin-top: .5em}
+	#secondary h3 {text-transform: uppercase; color: #5a5b5b; font-size: 12px; margin: 2em 0 1em 0; border-top: none}
+		#main h3.first, #secondary h3.first, #tertiary h3.first {margin-top: 0;}
+	#tertiary h3 {color: #807f83;  border-bottom: 1px solid #e1e2e3; margin: 1.5em 0 1em 0; padding: .1em 0}
+h4, h5, h6 {margin: 1.5em 0 .5em 0;}
+h4 {font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 1px; font-weight: bold}
+h5 {font-size: 11px; color: #97969a; text-transform: uppercase; letter-spacing: 1px; font-weight: normal;}
+h6 {font-size: 11px; color: #ff9100; text-transform: uppercase; letter-spacing: 1px; font-weight: normal;}
+
+/*-------------------------------------------
+   LAYOUT
+-------------------------------------------*/
+
+#wrap { background: #fff; margin: 1.5em auto 1.5em auto; min-width: 768px; width:96%; position: relative; }
+
+#header {width: 992px; margin: 0px; float: left; padding:24px 0 0 0; clear: both; }
+	#header h1 { float:left; background: url(../img/tr_logo_40.gif) no-repeat top right; height: 60px; width: 968px; *width: 972px; min-width: 968px; padding-left:5px;  margin: 0px; }
+	#header h1 a { float:left; text-indent: -9999px; width: 600px;	background: url(../img/site-name.png)  no-repeat top left; margin: 0 0 0 13px; *margin: 0 0 0 7px; display: block; overflow:hidden; border-bottom: medium none; height: 60px; }
+
+#search	{  padding: 4px 0px 3px 15px;  }
+		#search * { vertical-align: middle; }
+		#search label { position: absolute; left: -9999px; }
+		#search p { padding: 0; margin: 6px 0 0 0; *margin: 5px 0 0 0}
+			#search p input {}
+			#search p #searchfield { width: 132px; margin: 0 11px 0 20px; }
+
+#nav { float:left; width: 100%; height: 32px; border-bottom:1px solid #e1e2e3; border-top:1px solid #e1e2e3;}
+
+
+/*-- container for the text area of page (main + secondary + tertiary --*/
+	#wrap > article { clear:both; margin: 0; padding:20px; }
+	#wrap > article.nopad { padding: 0px; }
+
+/*-- the primary content on the page  --*/
+	#main {float: left; width: 468px;  margin: 0 30px 0 0;  padding: 18px 0; }
+
+	/*-- divide the main body column into sections --*/
+		.half {width: 48%; float: left;}
+		 	.last_half { width: 48%; float: right; margin-left: 12px;}
+		.third {width: 30%; float: left;}
+
+/*-- the secondary navigation - in this case the left hand accordion--*/
+	#secondary {float: left; display: inline; width: 174px; margin: 0px 28px 0 20px; padding: 18px 0; }
+
+/*-- the third level navigation - in this case right hand calls to action --*/
+	#tertiary {float: left; width: 220px;  margin: 18px 6px 0 10px;  }
+		.callout {padding-left: 6px;}
+
+
+.clearfix:after { content: "."; display: block; height: 0.1px; clear: both; font-size: 0; visibility: hidden; }
+.clearfix { display: inline-table; }
+/* \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* */
+
+
+/*-------------------------------------------
+    MENUBAR
+-------------------------------------------*/
+
+
+#menubar {float: left; padding: 2px 0; margin: 4px 0 0 6px; list-style: none;  padding: 0;}
+#menubar a{display: block; color: #8e8e8e; text-decoration: none; border-bottom: none; text-transform: uppercase; font-weight: bold; font-size: 12px;}
+	#menubar a.trigger {padding: 4px 10px 5px 10px; }
+#menubar li {float: left; position: relative; background: none; padding: 0; margin: 0; }
+
+/* hide from IE mac \*/
+#menubar li {position: static; width: auto;}
+
+/*--- dropdown menu secondary items ---*/
+
+#menubar li ul, #menubar ul li  {width: 140px; z-index:500;	 }
+#menubar ul li {padding: 0; margin: 0;}
+#menubar ul li a  {padding: 3px 5px; margin: 0 3px; }
+#menubar li ul {position: absolute;	display: none;background-color: #fff; border: 1px solid #cecece; border-bottom: 1px solid #888; border-right: 1px solid  #bababa; padding: 6px 0; list-style-type: none; }
+#menubar li:hover a, #menubar a:focus, #menubar a:active, #menubar li.hvr a {color: #444; background: #eee }
+#menubar li:hover ul, #menubar li.hvr ul {display: block; margin: 0;}
+#menubar li:hover ul a, #menubar li.hvr ul a {color: #222;background-color: transparent;}
+#menubar ul a {color: #0078ae !important; text-transform: none; font-weight: normal; border-bottom: 1px solid #eee; text-align: left; background-image: none !important; outline: none;  }
+	#menubar ul a.last {border-bottom: none;}
+#menubar ul a:hover {background: #f2f2f2 !important;color: #444 !important;}
+
+/*-------------------------------------------
+    BREADCRUMB
+-------------------------------------------*/
+
+#breadcrumb {margin: .5em 0 0 19px; *margin-left: 21px;}
+#breadcrumb li { color: #404040; font-size: 11px; background: transparent url(../img/breadcrumb_marker.gif) no-repeat left center; padding-left: 8px; display: inline; left: 0; }
+#breadcrumb li.first { background: none; padding: 0; color: #404040; }
+#breadcrumb a { color: #97969a; border: none; }
+#breadcrumb a:hover, #breadcrumb a:focus { color: #babcbe;}
+
+/*-------------------------------------------
+    FOOTER
+-------------------------------------------*/
+
+#footer-wrap { clear: both; position: relative; top: 0; min-width:768px; background-color: #fff; padding:0;}
+#footer {float: left; width: 100%; margin: 3em 0 0 0; background: #eeefef; clear: both; height: 24px; padding-top: 8px}
+#footer * { color: #97969a; display: inline; font-size: 11px; text-transform: uppercase; }
+	#footer address { padding-left: 21px; margin-right: 30px; }
+	#footer #version {float:right; margin-right: 30px;}
+#footer ul {list-style: none; }
+	#footer li {background: none; margin: 0; padding: 0;}
+#footer li a { color: #807f83; border-bottom: 1px solid #e3e5e6; margin-right: 2em;}
+#footer li a:hover, #footer li a:focus { color: #ff9100;}
+
+
+/*-------------------------------------------
+    TABLES
+-------------------------------------------*/
+
+table { border-collapse: separate; margin:3px 0 1em 0; border-spacing: 0 0; }
+caption {text-align: left; padding: 12px 0 3px 3px; color: #666; font-size: 12px; font-weight: bold; letter-spacing: .03mm; text-transform: uppercase;}
+.alt td { background-color: #f8f8f8 }
+	th, td { font-size:12px; padding:3px 5px; border-left: 2px solid #fff; vertical-align: top; color:#666; empty-cells: show}
+		th { background-color:#f1f1f1; color:#787878; font-weight:bold; text-align: left; white-space:nowrap;}
+			 th a {text-decoration: none; border-bottom: 1px solid #dedede !important; color: #787878 !important; font-weight: bold;}
+			 	 th a:hover {color: #c0c0c0 !important}
+    	 	 td a {text-decoration: none; border-bottom: none !important; }
+	    .number { text-align:right !important; padding: 3px 5px 3px 1px; }
+		.cell_center {text-align: center !important; padding: 3px 5px 3px 1px;}
+
+table.noborder { border-collapse: separate; border: 0px; width:100%; margin:3px 0 0 0; border-spacing: 0 0; }
+table.noborder td { font-size:11px; padding:3px 5px; border: 0px; vertical-align: top; color:#666; empty-cells: show; }
+table.noborder td.iReport { width: 100%; height: 170px; border: 1px solid #b0b0b0; padding-left: 2px;}
+table.noborder td.tdView { border-bottom: 1px solid #f0f0f0; padding-left: 2px;}
+
+/*------------------------------------------
+    FORMS
+-------------------------------------------*/
+fieldset {border: none; border-top: 1px solid #e1e2e3; margin: 20px 0; padding: 4px 0;}
+	fieldset .half, fieldset .last-half {width: 200px !important; padding-left: 3px !important;}
+legend {font-size: 12px; color: #666; text-transform: uppercase; font-weight: bold;  letter-spacing: .02cm; padding-right: .3em}
+/* select {  width: 95%; } */
+	p select {  margin-bottom: 5px;  }
+input, textarea {width: auto; margin: 0 6px 0 0;}
+	input.aligned { margin-top: 24px !important; }
+	input.aligned_bottom { margin-top: -16px !important; }
+	input.img_input { width: auto !important; float: right; margin-right: 16px;}
+        input.img_input_go { width: auto !important; float: right; margin-top: -22px; padding-right: 14px}
+.small {width: 50px; font-size: 11px; padding: 1px 1px;}
+.smallmed {width: 70px; font-size: 11px; padding: 1px 1px;}
+.smallmeddisable {width: 70px; font-size: 11px; background-image: url(../img/trTableBgDot.gif);}
+.smallmedreadonly {width: 70px; font-size: 11px; background: #f1f1f1;}
+.smalllarge {width: 100px; font-size: 11px; padding: 1px 1px;}
+.medium {width: 150px; font-size: 11px; padding: 1px 1px;}
+.mediumdisable {width: 150px; font-size: 11px; padding: 1px 1px; background-image: url(../img/trTableBgDot.gif);}
+.mediumreadonly {width: 150px; font-size: 11px; padding: 1px 1px; background: #f1f1f1;}
+.mediumlarge {width: 200px; font-size: 11px; padding: 1px 1px;}
+.large {width: 290px; font-size: 11px; padding: 1px 1px;}
+.largedisable {width: 290px; font-size: 11px; padding: 1px 1px; background-image: url(../img/trTableBgDot.gif);}
+.largereadonly {width: 290px; font-size: 11px; padding: 1px 1px; background: #f1f1f1;}
+.xlarge {width: 360px; font-size: 11px; padding: 1px 1px;}
+.textBoxBigDisable { border: 1px solid #CFCFCF; background-image: url(../img/trTableBgDot.gif); margin: 0px 0; padding: 1px 1px; font-size: 11px;  width: 290px; height: 95px; color: #3F3F3F}
+label {color: #5a5b5b; font-size: 11px; }
+	label em {margin: 0 6px 0 6px; font-weight: bold;  color: #f00 !important;}
+.submit { width:95%; text-align:right; }
+form strong {color: #5a5b5b;}
+ul.form_list  {margin: .3em 0;} /*-- use for radio button and checkbox arrays -- */
+	.form_list li {display: inline; background: none; margin-right:1em; padding: 0}
+	.form_list_label {margin-top: 1em;}
+button {
+	padding: 5px;
+}
+
+
+/*------------------------------------------
+    IE 6 and 7 OVERRIDES
+-------------------------------------------*/
+* html body  ol li {margin: .6em 0 0 26px}
+* + html body  ol li { margin: .6em 0 0 26px; }
+
+* html body h2 {margin-left: 20px}
+* + html body h2 {margin-left: 20px}
+
+* html #header h1 a {margin: 0 0 0 8px;}
+* + html body #header h1 a {margin: 0 0 0 8px;}
+
+* html #search p {margin: 5px 0 0 0}
+* + html body #search p {margin: 5px 0 0 0}
+
+* html #breadcrumb {margin-left: 23px;}
+* + html {margin-left: 23px;}
+
+
+* + html body #menuwrapper, * + html body #menubar ul a {height: 1%;}
+* + html body a:active {width: auto;}

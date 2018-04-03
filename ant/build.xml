@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+<project name="AutomaticTellerMachine" default="devBuild" basedir=".">
+
+	<!-- Properties -->
+	<property name="version" value="1.0" />
+	<property name="sourceDir" value="../src" />
+	<property name="unitTestSourceDir" value="../UnitTests" />
+	<property name="librariesDir" value="../lib" />
+	<property name="webLibrariesDir" value="../WebContent/WEB-INF/lib" />
+	<property name="webClassesDir" value="../WebContent/WEB-INF/classes" />
+	<property name="configFilesDir" value="../resources" />
+	<property name="binariesDir" value="../build" />
+	<property name="distDir" value="../dist" />
+	<property name="testBinariesDir" value="../tests" />
+	<property name="unitTestReports" value="../junitreports" />
+	<!-- The following are expected to be passed in, these are here just for developer builds -->
+	<property name="BUILD_NUMBER" value="0" />
+	<property name="WORKSPACE" value="" />
+	<property name="TOMCAT_LIB_DIR" value="" />
+	
+	<path id="compile.classpath">
+		<fileset dir="${webLibrariesDir}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${librariesDir}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${TOMCAT_LIB_DIR}">
+			<include name="servlet-api.jar"/>
+		</fileset>
+	</path>
+	
+	<!-- Targets -->
+	<target name="clean">
+		<delete dir="${binariesDir}" />
+		<delete dir="${distDir}" />
+		<delete dir="${testBinariesDir}" />
+		<delete dir="${unitTestReports}" />
+	</target>
+	
+	<target name="compile" depends="init">
+		<javac destdir="${binariesDir}" debug="on" debuglevel="lines,source" includeantruntime="false" srcdir="${sourceDir}">
+			<classpath refid="compile.classpath" />
+		</javac>
+	</target>
+	
+	<target name="copyResources">
+		<copy todir="../dist">
+			<fileset dir="../resources">
+				<include name="*.xml"/>
+				<include name="*.properties"/>
+				<exclude name="${ant.project.name}.properties" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="copyToBuild">
+		<copy todir="${WORKSPACE}/../${version}.${BUILD_NUMBER}">
+			<fileset dir="${distDir}">
+				<include name="*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="devBuild" depends="echo, clean, compile, unitTestRun" description="For use on developer machines">
+	</target>
+	
+	<target name="echo" description="echo the project name">
+		<echo>${ant.project.name}</echo>
+	</target>
+	
+	<target name="init">
+		<mkdir dir="${binariesDir}" />
+		<mkdir dir="${distDir}" />
+		<mkdir dir="${testBinariesDir}" />
+		<mkdir dir="${unitTestReports}" />
+	</target>
+
+	<target name="unitTestCompile" depends="init">
+		<javac destdir="${testBinariesDir}" srcdir="${unitTestSourceDir}" includeantruntime="false" debug="on">
+			<classpath>
+				<pathelement path="${binariesDir}" />
+				<path refid="compile.classpath" />
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="unitTestReport" depends="unitTestRun">
+		<!-- This needs to be seperate due to a bug with java(?).
+			See: https://bugs.eclipse.org/bugs/show_bug.cgi?id=384757
+			It looks like there was a bug in ant 1.8.2 that could cause this to fail.
+			So ant 1.8.4 should be used. See: https://issues.apache.org/bugzilla/show_bug.cgi?id=51668 -->
+			<junitreport todir="${unitTestReports}">
+				<fileset dir="${unitTestReports}">
+					<include name="TEST-*.xml" />
+				</fileset>
+				<report todir="${unitTestReports}" />
+			</junitreport>
+		</target>
+	
+	<target name="unitTestRun" depends="unitTestCompile">
+		<junit printsummary="true" failureproperty="junit.failed">
+			<classpath>
+				<pathelement path="${testBinariesDir}" />
+				<pathelement path="${binariesDir}" />
+				<pathelement path="${webClassesDir}" />
+				<path refid="compile.classpath" />
+			</classpath>
+			<formatter type="xml" />
+			<batchtest fork="yes" todir="${unitTestReports}">
+				<fileset dir="${testBinariesDir}" includes="**/*Tests.class" />
+			</batchtest>
+		</junit>
+		<fail if="junit.failed" message="Unit test(s) failed.  See reports." />
+	</target>
+
+	<target name="createWar" depends="compile">
+		<war destfile="../dist/${ant.project.name}.war" needxmlfile="false">
+			<fileset dir="../WebContent"/>
+			<classes dir="../build"/>
+			<manifest>
+				<attribute name="Implementation-Vendor" value="Thomson Reuters" />
+				<attribute name="Implementation-Title" value="${ant.project.name}" />
+				<attribute name="Implementation-Version" value="${version}.${BUILD_NUMBER}" />
+			</manifest>
+		</war>
+	</target>
+
+</project>

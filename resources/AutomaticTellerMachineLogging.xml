@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="LogFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${appLogDir}/${instanceName}_plain.log" />
+		<param name="DatePattern" value=".yyyy-MM-dd" />
+		<param name="Threshold" value="DEBUG" />
+		<param name="ImmediateFlush" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t] %c{1}: %m%n" />
+		</layout>
+		<!-- don't log LogRecord items -->
+		<filter class="com.trgr.cobalt.infrastructure.logging.ClassFilter">
+			<param name="classNameFilter" value="com.trgr.cobalt.infrastructure.logging.LogRecord" />
+			<param name="acceptOnMatch" value="false" />
+			<param name="neutrality" value="true" />
+		</filter>
+		<!-- don't log HttpRequest items -->
+		<filter class="com.trgr.cobalt.infrastructure.logging.ClassFilter">
+			<param name="classNameFilter" value="com.trgr.cobalt.infrastructure.logging.request.HttpRequest" />
+			<param name="acceptOnMatch" value="false" />
+		</filter>
+	</appender>
+
+	<appender name="HttpRequestFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="${appLogDir}/${instanceName}_requests.log" />
+		<param name="DatePattern" value=".yyyy-MM-dd" />
+		<param name="Threshold" value="INFO" />
+		<param name="ImmediateFlush" value="true" />
+		<layout class="com.trgr.cobalt.infrastructure.logging.request.HttpRequestXMLLayout">
+		</layout>
+		<!-- don't log HttpRequests with "statuscheck" in the URI -->
+		<filter class="com.trgr.cobalt.infrastructure.logging.request.HttpRequestNameValueFilter">
+			<param name="name" value="uri" />
+			<param name="value" value="statuscheck" />
+			<param name="acceptOnMatch" value="false" />
+			<param name="containsString" value="true" />
+		</filter>
+	</appender>
+
+	<appender name="AsyncAppender" class="org.apache.log4j.AsyncAppender">
+		<param name="Blocking" value="false" />
+		<param name="BufferSize" value="500" />
+		<appender-ref ref="LogFileAppender" />
+		<appender-ref ref="HttpRequestFileAppender" />
+	</appender>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework">
+		<level value="warn" />
+	</logger>
+
+	<logger name="org.hibernate.validator">
+		<level value="warn" />
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="AsyncAppender" />
+	</root>
+
+</log4j:configuration>
