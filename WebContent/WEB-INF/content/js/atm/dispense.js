@@ -4,7 +4,7 @@ $(document).ready(function () {
 	$overlay = $('<div class="ui-overlay"><div class="ui-widget-overlay"></div></div>').hide().appendTo('body');
 });
 
-function dispenseEntry(){
+function dispenseAction(){
     if(checkForm()){
         if (confirm("Do you want to save this record ? ")){
         	$("[id$=_error]").text("");

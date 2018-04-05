@@ -35,7 +35,7 @@
 											<tr height="25"><td colspan="2" height="9"></td></tr>
 											<tr>
 												<td colspan="2" height="9" align="center">
-													<input type="button" name="btn_submit" class="buttonSubmit" onclick="dispenseEntry(); return false;"> 
+													<input type="button" name="btn_submit" class="buttonSubmit" onclick="dispenseAction(); return false;"> 
 													<input type="reset" name="btn_reset" value="" class="buttonCancel">
 												</td>
 											</tr>
